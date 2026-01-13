@@ -1,4 +1,4 @@
-import { start } from './Backend/app.js'
+import { start } from './backend/app.js'
 
 start();
 
