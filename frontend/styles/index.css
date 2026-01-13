@@ -5,17 +5,76 @@ body {
   height: 755px;
 }
 
+p {
+  margin: 0;
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
-  background-color: rgb(43, 43, 43);
+  background-color: rgb(33, 33, 33);
   width: 260px;
   height: 100%;
 }
 
-.profile { 
-  background-color: red;
-  height: 100px;
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  display: flex;
+  height: 96px;
+  padding-left: 12px;
+}
+
+.profile-details {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  gap: 10px;
+}
+
+.pfp { 
+  width: 50px;
+  height: 48px;
+  border-radius: 30px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.user-details { 
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  color: rgb(221, 221, 221);
+  width: 100%;
+}
+
+.username { 
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.search {
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid rgb(57, 57, 57);
+  border-bottom-width: 2px;
+  border-bottom-color: rgb(195, 191, 191);
+  width: 212px;
+}
+
+.search-input { 
+  height: 28px;
+  border-radius: 5px;
+  outline: none;
+  background-color: rgb(33, 33, 33);
+  border: none;
+  padding-left: 10px;
+  color: rgb(190, 190, 190);
+}
+
+.search-input::placeholder { 
+  color: rgb(190, 190, 190);
 }
 
 .category {
@@ -58,7 +117,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 5px;
-  height: 425px;
+  height: 410px;
 }
 
 .list-container {
@@ -84,7 +143,7 @@ body {
   height: 100%;
   padding-left: 50px;
   padding-right: 50px;
-  background-color: rgb(33, 33, 33);
+  background-color: rgb(30, 30, 30);
 }
 
 .container {
@@ -161,10 +220,10 @@ body {
   background-color: rgb(43, 43, 43);
   color: rgb(237, 227, 214);
   font-size: 14px;
-  background-image: url(./assets/main-content-icons/add-task.svg);
   margin-top: 5px;
   width: 100%;
   outline: none;
+  padding-left: 20px;
 }
 
 .add-task-input::placeholder {

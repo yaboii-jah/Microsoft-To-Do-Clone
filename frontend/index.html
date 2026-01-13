@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="./styles/index.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -13,14 +13,28 @@
 <body>
   
   <div class="sidebar">
-    <div class="profile"></div>
-    <div class="category">
-      <div class="sidebar-buttons"><img src="./assets/sidebar-icons/myday-icon.svg" class="sidebar-icon"><span class="category-title">My Day</span></div>
-      <div class="sidebar-buttons"><img src="./assets/sidebar-icons/important-icon.svg" class="sidebar-icon"><span class="category-title">Important</span></div>
-      <div class="sidebar-buttons"><img src="./assets/sidebar-icons/planned-icon.svg" class="sidebar-icon"><span class="category-title">Planned</span></div>
-      <div class="sidebar-buttons"><img src="./assets/sidebar-icons/assigned-icon.svg" class="sidebar-icon"><span class="category-title">Assigned</span></div>
-      <div class="sidebar-buttons"><img src="./assets/sidebar-icons/tasks-icon.svg" class="sidebar-icon"><span class="category-title">Tasks</span></div>
+    <div class="profile">
+      <div class="profile-details">
+        <img src="./assets/images/profile-picture.jpg" class="pfp">
+        <div class="user-details">
+          <p class="username">Jahmell Dorias</p>
+          <p class="user-gmail">jahmelldorias17@gmail.com</p>
+        </div>
+      </div>
+      <div class="search">
+        <input type="text" placeholder="Search" class="search-input">
+        <img src="./assets/sidebar-icons/search-icon.svg" class="sidebar-icon">          
+      </div>
     </div>
+
+    <div class="category">
+      <div class="sidebar-buttons category"><img src="./assets/sidebar-icons/myday-icon.svg" class="sidebar-icon"><span class="category-title">My Day</span></div>
+      <div class="sidebar-buttons category"><img src="./assets/sidebar-icons/important-icon.svg" class="sidebar-icon"><span class="category-title">Important</span></div>
+      <div class="sidebar-buttons category"><img src="./assets/sidebar-icons/planned-icon.svg" class="sidebar-icon"><span class="category-title">Planned</span></div>
+      <div class="sidebar-buttons category"><img src="./assets/sidebar-icons/assigned-icon.svg" class="sidebar-icon"><span class="category-title">Assigned</span></div>
+      <div class="sidebar-buttons category"><img src="./assets/sidebar-icons/tasks-icon.svg" class="sidebar-icon"><span class="category-title">Tasks</span></div>
+    </div>
+
     <div class="list">
       <div class="list-container"></div>  
       <div class="list-buttons">
@@ -38,8 +52,6 @@
       </div>
 
       <div class="tasks">
-        <div class="task-container"><img src="./assets/main-content-icons/circle-icon.svg" class="task-check non-check"><span class="task">I will run for 20km</span><img src="./assets/main-content-icons/star-icon.svg" class="task-check non-marked"></div>
-        <div class="task-container"><img src="./assets/main-content-icons/circle-icon.svg" class="task-check non-check"><span class="task">I will run for 20km</span><img src="./assets/main-content-icons/star-icon.svg" class="task-check non-marked"></div>
       </div>
 
       <div class="add-task">
@@ -47,6 +59,8 @@
       </div>
     </div>
   </div>
+
+  <script type="module" src="./scripts/pages/index.js"></script>
 
 </body>
 </html>
