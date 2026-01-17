@@ -6,4 +6,5 @@ export async function generateTasks (tasks) {
     `
   })
   document.querySelector('.tasks').innerHTML = html;
+  document.querySelector('.add-task-input').value = ''
 }

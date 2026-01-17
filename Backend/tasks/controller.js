@@ -1,6 +1,7 @@
 import { addTask, removeTask, getTasks, checkForEquality, findTask, updateTask as update, filterTask} from "./model.js"
 
-export async function createTask (req, res) { 
+export async function createTask (req, res) {
+  console.log(req.body)
   const task = await checkForEquality(req.body)
 
   if (task.length !== 0) {
