@@ -234,3 +234,47 @@ p {
   background-color: rgb(75, 75, 75);
 }
 
+.drawer {
+  display: flex;
+  flex-direction: column;
+  width: 640px;
+  padding: 10px;
+  background-color: rgb(33, 33, 33);
+}
+
+.drawer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+}
+
+.task-drawer {
+  border-radius: 3px;
+  background-color: gray;
+}
+
+.drawer-close {
+  height: 25px;
+}
+
+.drawer-update-task { 
+  height: 100px;
+}
+
+.drawer-addMyDay, .drawer-add-file {
+  height: 45px;
+}
+
+.drawer-set-time {
+  height: 140px;
+}
+
+.drawer-add-note {
+  height: 70px;
+}
+
+.drawer-task-delete {
+  background-color: red;
+  height: 50px;
+}
