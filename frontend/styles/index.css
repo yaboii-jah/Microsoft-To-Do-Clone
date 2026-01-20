@@ -234,12 +234,19 @@ p {
   background-color: rgb(75, 75, 75);
 }
 
+/* drawer */
+.drawer-container {
+  display: flex;
+}
+
 .drawer {
   display: flex;
   flex-direction: column;
-  width: 640px;
+  width: 350px; 
   padding: 10px;
   background-color: rgb(33, 33, 33);
+  color: rgb(187, 185, 185);
+  font-size: 14px;
 }
 
 .drawer-content {
@@ -251,30 +258,87 @@ p {
 
 .task-drawer {
   border-radius: 3px;
-  background-color: gray;
+  background-color: rgb(20, 20, 20);
 }
 
-.drawer-close {
+.task-drawer:hover {
+  background-color: rgb(78, 78, 78);
+}
+
+.drawer-header {
+  background-color: rgb(33, 33, 33);
+  text-align: right;
+  padding: 0px 10px;
   height: 25px;
 }
 
-.drawer-update-task { 
-  height: 100px;
+.drawer-update-task {
+  display: flex;
+  gap: 10px;
+  height: 50px;
+  background-color: rgb(20, 20, 20);
+  border-radius: 2px;
+  padding-right: 10px;
+}
+
+.update-task-input {
+  font-family:  Roboto, sans-serif;
+  align-content: center;
+  color: white;
+  border: none;
+  width: 300px;
+  font-size: 20px;
+  background-color: rgb(20, 20, 20);
+  padding-left: 15px;
+  outline: none;
+}
+
+.update-task-input::-webkit-scrollbar {
+  display: none;
 }
 
 .drawer-addMyDay, .drawer-add-file {
+  display: flex;
+  align-items: center;
   height: 45px;
+  padding: 0px 14px;
+  gap: 10px;
 }
 
 .drawer-set-time {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 140px;
+  background-color: rgb(20, 20, 20);
+  border-radius: 2px;
 }
 
-.drawer-add-note {
-  height: 70px;
+.add-note-input {
+  font-family:  Roboto, sans-serif;
+  align-content: baseline;
+  color: white;
+  height: 45px;
+  border: none;
+  font-size: 14px;
+  background-color: rgb(20, 20, 20);
+  padding-left: 14px;
+  outline: none;
+  padding: 15px;
+}
+
+.add-note-input::placeholder {
+  color: rgb(187, 185, 185);
 }
 
 .drawer-task-delete {
-  background-color: red;
-  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+}
+
+.created {
+  text-align: center;
+  align-content: center;
+  width: 320px;
 }

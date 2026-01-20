@@ -26,6 +26,7 @@ export async function deleteTask (req, res) {
 }
 
 export async function updateTask (req, res) {
+
   const task = await findTask(req.params.id)
 
   if (task.length === 0) { 

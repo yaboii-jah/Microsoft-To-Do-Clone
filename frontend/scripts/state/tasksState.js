@@ -27,3 +27,17 @@ export function getAllTask () {
   return tasks;
 }
 
+export function getTaskByID (id) { 
+  return  tasks.find(task => id === task._id)
+}
+
+export function updateTask (id, value, property) { 
+  let toUpdate = {}
+
+  const index = tasks.findIndex(task => task._id === id)
+  tasks[index][property] = value
+  toUpdate[property] = value
+
+  return { id : id , toUpdate }
+}
+

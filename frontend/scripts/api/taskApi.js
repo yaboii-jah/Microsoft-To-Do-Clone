@@ -8,14 +8,28 @@ export async function addTask (task) {
     await fetch ('http://localhost:3000/tasks/api/add', {
       method : 'POST',
       headers : {
-        'Content-Type' : 'application/json',
-        'Accept' : 'application/json'
+        'Content-Type' : 'application/json'
       },
       body : JSON.stringify(task)
     })
   } catch (error) {
     console.error(error)
   }
+}
+
+export async function updateTask (taskDetails) {
  
+ try {
+  await fetch(`http://localhost:3000/tasks/api/${taskDetails.id}/update`, {
+    method : 'PATCH',
+    headers : {
+      'Content-Type' : 'application/json'
+    },
+    body : JSON.stringify(taskDetails.toUpdate)
+  })
+  
+ } catch (error) { 
+  console.error(error)
+ }
 }
 
