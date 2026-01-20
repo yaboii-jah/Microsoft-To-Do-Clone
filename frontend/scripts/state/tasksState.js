@@ -41,3 +41,8 @@ export function updateTask (id, value, property) {
   return { id : id , toUpdate }
 }
 
+export function deleteTask (id) { 
+  tasks = tasks.filter(task => task._id !== id)
+  console.log(tasks)
+}
+

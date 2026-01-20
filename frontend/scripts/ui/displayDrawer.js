@@ -35,7 +35,7 @@ export function displayDrawer (task) {
     </div>
     <div class="drawer-task-delete">
       <span class="created">Created on Thu, 16 Jan</span>
-      <img src="./assets/drawer-icons/remove-icon.svg" class="sidebar-icon remove-btn">
+      <img src="./assets/drawer-icons/remove-icon.svg" class="sidebar-icon remove-btn" data-id="${task._id}">
     </div>
   </div>
   `

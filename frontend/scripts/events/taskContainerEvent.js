@@ -8,6 +8,7 @@ export function showTaskDrawerEventListener () {
     taskContainer.addEventListener('click', () => {
       displayDrawer(getTaskByID(taskID))
       drawerEvents.updateTaskEvent()
+      drawerEvents.deleteTaskEvent()
     })
   })
 
