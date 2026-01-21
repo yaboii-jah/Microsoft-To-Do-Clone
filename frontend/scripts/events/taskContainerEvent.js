@@ -11,5 +11,12 @@ export function showTaskDrawerEventListener () {
       drawerEvents.deleteTaskEvent()
     })
   })
+}
 
+export function partialShowTaskDrawerEventListener (taskContainers, updatedTask) {
+  taskContainers[taskContainers.length - 1].addEventListener('click', () => {
+    displayDrawer(updatedTask)
+    drawerEvents.updateTaskEvent()
+    drawerEvents.deleteTaskEvent()
+  })
 }

@@ -9,21 +9,23 @@ const taskSchema = new mongoose.Schema({
 
 const tasks = mongoose.model('tasks', taskSchema)
 
-export async function getTasks () {
-  return await tasks.find();
+export async function getTasks (filter = {}) {
+  return await tasks.find(filter);
 }
 
 export async function addTask (task) {
   const date = new Date(task.date)
   
-  await tasks.create({
+  const taskToBeAdded = {
     task : task.task,
     category : task.category,
     date : date,
     status : task.status
-  })
+  }
 
-  return await getTasks();
+  await tasks.create(taskToBeAdded)
+
+  return await getTasks(taskToBeAdded);
 };
 
 export async function checkForEquality (taskToCheck) { 
