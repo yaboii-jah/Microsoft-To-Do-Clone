@@ -13,6 +13,6 @@ export async function generateTasks (tasks) {
 
 export async function generateNewAddedTask (updatedTask) {
   document.querySelector('.tasks').insertAdjacentHTML( 'beforeend',
-    `<div class="task-container" data-id = "${updatedTask[0]._id}"><img src="./assets/main-content-icons/circle-icon.svg" class="task-check non-check"><span class="task">${updatedTask[0].task}</span><img src="./assets/main-content-icons/star-icon.svg" class="task-check non-marked"></div>`
+    `<div class="task-container" data-id = "${updatedTask._id}"><img src="./assets/main-content-icons/circle-icon.svg" class="task-check non-check"><span class="task">${updatedTask.task}</span><img src="./assets/main-content-icons/star-icon.svg" class="task-check non-marked"></div>`
   )
 }

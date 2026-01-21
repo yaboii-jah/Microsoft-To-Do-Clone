@@ -9,6 +9,7 @@ export function showTaskDrawerEventListener () {
       displayDrawer(getTaskByID(taskID))
       drawerEvents.updateTaskEvent()
       drawerEvents.deleteTaskEvent()
+      drawerEvents.closeDrawer()
     })
   })
 }
@@ -18,5 +19,6 @@ export function partialShowTaskDrawerEventListener (taskContainers, updatedTask)
     displayDrawer(updatedTask)
     drawerEvents.updateTaskEvent()
     drawerEvents.deleteTaskEvent()
+    drawerEvents.closeDrawer()
   })
 }

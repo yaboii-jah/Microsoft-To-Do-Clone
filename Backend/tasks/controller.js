@@ -1,22 +1,18 @@
-import { addTask, removeTask, getTasks, checkForEquality, findTask, updateTask as update, filterTask} from "./model.js"
+import { addTask, removeTask, getTasks, updateTask as update, filterTask} from "./model.js"
+import { randomUUID } from 'node:crypto';
 
 export async function createTask (req, res) {
-  console.log(req.body)
-  const task = await checkForEquality(req.body)
-
-  if (task.length !== 0) {
-    return res.status(409).send('Duplicate Data')
-  }
-
   if (req.body.task === '') { 
     return res.status(422).send('No Data Input')
-  } 
+  }
 
-  res.send(await addTask(req.body))
+  const taskID = randomUUID()
+  console.log(taskID)
+  res.send(await addTask(req.body, taskID))
 }
 
 export async function deleteTask (req, res) {
-  const task = await findTask(req.params.id)
+  const task = await getTasks({_id : req.params.id})
  
   if (task.length === 0) { 
     return res.status(404).send('Not Found')
@@ -26,8 +22,11 @@ export async function deleteTask (req, res) {
 }
 
 export async function updateTask (req, res) {
+  if (req.body.task === '') { 
+    return res.status(422).send('No Data Input')
+  }
 
-  const task = await findTask(req.params.id)
+  const task = await getTasks({_id : req.params.id})
 
   if (task.length === 0) { 
     return res.status(404).send('Not Found')
@@ -37,13 +36,12 @@ export async function updateTask (req, res) {
 }
 
 export async function listTasks (req, res) {
-  if (req.query) {
+  if (Object.keys(req.query).length !== 0) {
     const filteredTask = await filterTask(req.query)
 
     if (filteredTask.length !== 0) {
       return res.send(filteredTask)
     }
-
     return res.status(404).send('Not Found')
   }
 

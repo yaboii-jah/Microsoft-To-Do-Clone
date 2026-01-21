@@ -1,4 +1,4 @@
-import { deleteTask, getTaskByID } from "../state/tasksState.js";
+import { deleteTask } from "../state/tasksState.js";
 import { deleteTask as deleteTaskApi } from "../api/taskApi.js";
 import { closeDeleteModal } from "../ui/closeDeleteModal.js";
 import { deleteTaskUi } from "../ui/deleteTaskUi.js";
@@ -10,6 +10,7 @@ export function deleteBtn (id) {
     await deleteTaskApi(id)
     deleteTaskUi(findTaskIndex(id, document.querySelectorAll('.task-container')))
     closeDeleteModal()
+    document.querySelector('.drawer-container').innerHTML = '';
   })
 }
 

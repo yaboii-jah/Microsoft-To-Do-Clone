@@ -6,21 +6,17 @@ export function setTasks (data) {
   tasks = data;
 }
 
+  export function setTaskByID () {
+
+}
+
 export function getTasks (event, checkCategory) {
   return checkCategory(event, tasks, formatDate)
 }
 
-export function addTask (task, category) {
-  const toBeAdded = { 
-    task : task,
-    category : category,
-    date : `${formatDate()}T00:00:00.000Z`,
-    status : "Pending"
-  }
-
-  tasks.push (toBeAdded)
-  
-  return toBeAdded
+export function addTask (addedTask) {
+  tasks.push (addedTask)
+  console.log(tasks)
 }
 
 export function getAllTask () {

@@ -1,5 +1,5 @@
 import { updateTask as updateTaskApi} from "../api/taskApi.js"
-import { updateTask, getTaskByID, getAllTask } from "../state/tasksState.js"
+import { updateTask, getTaskByID} from "../state/tasksState.js"
 import { updateTask as updateTaskUi } from "../ui/updateTask.js"
 import { findTaskIndex } from "../logic/findIndex.js"
 import { showDeleteModal } from "../ui/showDeleteModal.js"
@@ -24,5 +24,10 @@ export function deleteTaskEvent () {
     deleteBtn(deleteTaskElement.dataset.id)
     cancelBtn()
   })
-  
+}
+
+export function closeDrawer () {
+  document.querySelector('.close-btn').addEventListener('click', () => {
+    document.querySelector('.drawer-container').innerHTML = '';
+  })
 }

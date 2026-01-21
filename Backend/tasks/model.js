@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 
 const taskSchema = new mongoose.Schema({
+  _id : String,
   task : String,
   category : String,
   date : Date,
@@ -13,28 +14,12 @@ export async function getTasks (filter = {}) {
   return await tasks.find(filter);
 }
 
-export async function addTask (task) {
-  const date = new Date(task.date)
-  
-  const taskToBeAdded = {
-    task : task.task,
-    category : task.category,
-    date : date,
-    status : task.status
-  }
+export async function addTask (task, id) {
+  task['_id'] = id
+  await tasks.create(task)
 
-  await tasks.create(taskToBeAdded)
-
-  return await getTasks(taskToBeAdded);
+  return await getTasks({_id : id});
 };
-
-export async function checkForEquality (taskToCheck) { 
-  return await tasks.find({task: taskToCheck.task})
-}
-
-export async function findTask (id) { 
-  return await tasks.findById({_id : id})
-}
 
 export async function removeTask (id) {
   await tasks.deleteOne({_id : id})
