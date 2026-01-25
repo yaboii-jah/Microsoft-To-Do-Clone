@@ -1,5 +1,6 @@
-import { addTask, removeTask, getTasks, updateTask as update, filterTask} from "./model.js"
+import { addTask, removeTask, getTasks, updateTask as update, filterTask} from "../models/model.js"
 import { randomUUID } from 'node:crypto';
+import { errorResponse, successResponse } from "../utils/responseFormat.js";
 
 export async function createTask (req, res) {
   if (req.body.task === '') { 
@@ -42,8 +43,9 @@ export async function listTasks (req, res) {
     if (filteredTask.length !== 0) {
       return res.send(filteredTask)
     }
-    return res.status(404).send('Not Found')
+    return res.status(404).send(new errorResponse(false, 'Task not Found', 'NOT_FOUND'))
   }
+  const tasks = await getTasks()
 
-  res.send(await getTasks())
+  res.status(201).send(new successResponse(true, tasks))
 }
