@@ -32,8 +32,5 @@ export async function updateTask (updatedTask, id) {
   )
 }
 
-export async function filterTask (filters) {
-  return await tasks.find(filters)
-}
 
  

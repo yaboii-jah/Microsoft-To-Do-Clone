@@ -7,8 +7,9 @@ export class errorResponse {
 }
 
 export class successResponse {
-  constructor (success, data) {
+  constructor (success, data, message) {
     this.success = success;
     this.data = data;
+    this.message = message;
   }
 }
