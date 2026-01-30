@@ -3,6 +3,7 @@ import cors from 'cors';
 import { routes as taskRoutes } from './routes/routes.js'
 import mongoose from 'mongoose';
 import morgan from 'morgan';
+import { query } from 'express-validator'; 
 
 const app = express();
 

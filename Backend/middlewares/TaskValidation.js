@@ -1,9 +1,10 @@
 import { getTasks } from "../models/model.js"
 import { errorResponse } from "../utils/responseFormat.js";
+import { validationResult } from "express-validator";
 
-export function bodyValidator (req, res, next) { 
-  if (req.body.task === '') { 
-    return res.status(422).send(new errorResponse(false, 'Request body is null', 'NO_DATA_INPUT'));
+export function bodyValidator (req, res, next) {
+  if (Object.keys(req.body).length === 0) {
+    return res.status(422).send(new errorResponse(false, 'Request body is empty', 'NO_DATA_INPUT'));
   }
 
   next();
@@ -11,7 +12,7 @@ export function bodyValidator (req, res, next) {
 
 export async function dataEqualityChecker (req, res, next) {
   const task = await getTasks({_id : req.params.id});
-  console.log(task)
+
   if (task.length === 0) { 
     return res.status(404).send(new errorResponse(false, 'Data not Found', 'NOT_FOUND'));
   } 
@@ -19,3 +20,24 @@ export async function dataEqualityChecker (req, res, next) {
   req.task = task;
   next();
 }
+
+export function validationResultChecker(req, res, next) { 
+  const error = validationResult(req)
+
+  if (error.isEmpty()) {
+    next();
+  }
+
+ const formattedErrors = error.array().reduce((acc, currentError) => {
+    if (!acc[currentError.path]) {
+      acc[currentError.path] = [];
+    }
+
+    acc[currentError.path].push(currentError.msg);
+    return acc;
+  }, {}); 
+
+
+  return res.status(400).send(new errorResponse(false, formattedErrors, 'Bad Request'))
+} 
+
