@@ -23,9 +23,9 @@ export async function dataEqualityChecker (req, res, next) {
 
 export function validationResultChecker(req, res, next) { 
   const error = validationResult(req)
-
+ 
   if (error.isEmpty()) {
-    next();
+    return next();
   }
 
  const formattedErrors = error.array().reduce((acc, currentError) => {
@@ -36,7 +36,6 @@ export function validationResultChecker(req, res, next) {
     acc[currentError.path].push(currentError.msg);
     return acc;
   }, {}); 
-
 
   return res.status(400).send(new errorResponse(false, formattedErrors, 'Bad Request'))
 } 

@@ -1,22 +1,58 @@
-import { query, body } from 'express-validator'; 
+import { param, body } from 'express-validator'; 
+import { errorResponse } from '../utils/responseFormat.js';
 
-export const addTaskValidator = [
-  body('task')
-    .exists().withMessage('Task Field don\'t exist')
-    .notEmpty().withMessage('Invalid Value on Task'),
+export const addTaskValidator =  { 
+  task : 
+    body('task')
+      .exists().withMessage('Task Field don\'t exist')
+      .trim()
+      .notEmpty().withMessage('Invalid Value on Task'),
 
-  body('category')
-     .exists().withMessage('Category Field don\'t exist')
-    .notEmpty().withMessage('Invalid Value on Category')
-    .isString().withMessage('Category must be String'),
+  category : 
+    body('category')
+      .exists().withMessage('Category Field don\'t exist')
+      .trim()
+      .notEmpty().withMessage('Invalid Value on Category')
+      .isString().withMessage('Category must be String'),
 
-  body('date')
-    .exists().withMessage('Date Field don\'t exist')
-    .notEmpty().withMessage('Invalid Value on Date')
-    .isISO8601().withMessage('Date must be in ISO8601'),
+  date : 
+    body('date')
+      .exists().withMessage('Date Field don\'t exist')
+      .trim()
+      .notEmpty().withMessage('Invalid Value on Date')
+      .isISO8601().withMessage('Date must be in ISO8601'),
 
-  body('status')
-    .exists().withMessage('Status Field don\'t exist')
-    .notEmpty().withMessage('Invalid Value on Status')
-    .isString().withMessage('Status must be String')
+  status : 
+    body('status')
+      .exists().withMessage('Status Field don\'t exist')
+      .trim()
+      .notEmpty().withMessage('Invalid Value on Status')
+      .isString().withMessage('Status must be String')
+}
+
+export const routeParamsTaskValidator = [
+  param('id')
+    .exists().withMessage('Please Provide ID')
+    .trim()
+    .isLength({min : 36, max : 36}).withMessage('ID Must be 36 Characters')
 ]
+
+export async function updateTaskValidator (req, res, next) {
+  const fields = Object.keys(req.body);
+  
+  const validators = []
+
+  for (const field of fields) {
+    validators.push(addTaskValidator[field])
+  }
+
+  if (validators.length === 0) { 
+    return res.status(422).send(new errorResponse(false, 'Invalid fields to Update', 'NO_VALID_FIELDS'))
+  }
+  
+  for (const validator of validators) {
+    await validator.run(req)
+  }
+
+  next()
+}

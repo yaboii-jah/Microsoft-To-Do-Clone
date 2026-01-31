@@ -10,12 +10,12 @@ export async function createTask (req, res) {
 
 export async function deleteTask (req, res) {
   await removeTask(req.params.id)
-  res.status(204).send(new successResponse(true, '', 'Data Deleted Successfully'));
+  res.status(204).send();
 }
 
 export async function updateTask (req, res) {
   await update(req.body, req.params.id)
-  res.status(204).send(new successResponse(true, '', 'Data Updated Successfully'))
+  res.status(204).send();
 }
 
 export async function listTasks (req, res) {
