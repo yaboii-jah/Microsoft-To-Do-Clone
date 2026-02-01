@@ -1,12 +1,13 @@
 import mongoose from 'mongoose'
 
 const taskSchema = new mongoose.Schema({
-  _id : String,
   task : String,
   category : String,
   date : Date,
   status : String
 })
+
+// implement a proper error handling for process that requires sending request to an api/database
 
 const tasks = mongoose.model('tasks', taskSchema)
 
@@ -14,11 +15,10 @@ export async function getTasks (filter = {}) {
   return await tasks.find(filter);
 }
 
-export async function addTask (task, id) {
-  task['_id'] = id
-  await tasks.create(task)
+export async function addTask (task) {
+  const result = await tasks.create(task)
 
-  return await getTasks({_id : id});
+  return result;
 };
 
 export async function removeTask (id) {

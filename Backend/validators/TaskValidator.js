@@ -34,7 +34,7 @@ export const routeParamsTaskValidator = [
   param('id')
     .exists().withMessage('Please Provide ID')
     .trim()
-    .isLength({min : 36, max : 36}).withMessage('ID Must be 36 Characters')
+    .isMongoId().withMessage('Please Provide a Valid MongoID')
 ]
 
 export async function updateTaskValidator (req, res, next) {
