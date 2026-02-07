@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors';
-import { routes as taskRoutes } from './routes/routes.js'
+import { routes as taskRoutes } from './routes/taskRoutes.js'
+import { routes as authRoutes } from './routes/authRoutes.js';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
 
@@ -13,7 +14,8 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 
-app.use('/tasks', taskRoutes);
+app.use('/tasks/api', taskRoutes);
+app.use('/auth/api', authRoutes)
 
 export function start() { 
   app.listen(3000, () => {

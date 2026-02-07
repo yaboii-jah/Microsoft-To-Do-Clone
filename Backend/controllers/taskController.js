@@ -1,9 +1,11 @@
-import { addTask, removeTask, getTasks, updateTask as update} from "../models/model.js"
+import { addTask, removeTask, getTasks, updateTask as update} from "../models/taskModel.js"
 import { successResponse, errorResponse } from "../utils/responseFormat.js";
 import { errorHandler } from "../utils/asyncErrorHandler.js";
+import { matchedData } from 'express-validator'; 
 
 export async function createTask (req, res) {
-  const { success, data} = await errorHandler(() => addTask(req.body))
+  const validatedData = matchedData(req)
+  const { success, data} = await errorHandler(() => addTask(validatedData))
   
   if (!success) {
     return res.status(500).send(new errorResponse(true, 'There is a problem with the server', 'INTERNAL_SERVER_ERROR'))
@@ -12,7 +14,8 @@ export async function createTask (req, res) {
 }
 
 export async function deleteTask (req, res) {
-  const { success} = await errorHandler(() => removeTask(req.params.id))
+  const { id } = matchedData(req)
+  const { success} = await errorHandler(() => removeTask(id))
   
   if (!success) {
     return res.status(500).send(new errorResponse(true, 'There is a problem with the server', 'INTERNAL_SERVER_ERROR'))

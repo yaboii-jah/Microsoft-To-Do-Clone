@@ -1,4 +1,4 @@
-import { getTasks } from "../models/model.js"
+import { getTasks } from "../models/taskModel.js"
 import { errorResponse } from "../utils/responseFormat.js";
 import { validationResult } from "express-validator";
 
@@ -39,4 +39,3 @@ export function validationResultChecker(req, res, next) {
 
   return res.status(400).send(new errorResponse(false, formattedErrors, 'Bad Request'))
 } 
-
