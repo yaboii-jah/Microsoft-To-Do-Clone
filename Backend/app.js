@@ -1,18 +1,23 @@
+import dotenv from 'dotenv';
 import express from 'express'
 import cors from 'cors';
 import { routes as taskRoutes } from './routes/taskRoutes.js'
 import { routes as authRoutes } from './routes/authRoutes.js';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
 
+dotenv.config();
 const app = express();
 
-await mongoose.connect('mongodb+srv://jahmelldorias17_db_user:SlxtRhY4BVL94W6T@cluster0.o8utnrs.mongodb.net/?appName=Cluster0')
+await mongoose.connect(process.env.MONGO_URI)
 
 app.use(cors());
+app.use(cookieParser('secret'))
 app.use(express.json())
 app.use(morgan('dev'))
-
+app.use(session())
 
 app.use('/tasks/api', taskRoutes);
 app.use('/auth/api', authRoutes)
