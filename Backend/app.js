@@ -17,7 +17,12 @@ app.use(cors());
 app.use(cookieParser('secret'))
 app.use(express.json())
 app.use(morgan('dev'))
-app.use(session())
+app.use(session({
+  secret : process.env.SECRET_KEY,
+  resave : false,
+  saveUninitialized : false,
+  cookie : { secure : false }
+}))
 
 app.use('/tasks/api', taskRoutes);
 app.use('/auth/api', authRoutes)

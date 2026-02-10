@@ -12,6 +12,5 @@ export async function login (req, res) {
     return  res.status(404).send({success : false})
   }
 
-  res.cookie('id', '123123', {maxAge : 300000} )
-  res.status(200).send({success : true, signed : true})
+ 
 }

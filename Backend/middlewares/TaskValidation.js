@@ -39,11 +39,3 @@ export function validationResultChecker(req, res, next) {
 
   return res.status(400).send(new errorResponse(false, formattedErrors, 'Bad Request'))
 }
-
-export function cookieValidator (req, res, next) {
-  if (!req.signedCookies.id) {
-    res.status(401).send({success : false})
-  }
-
-  next()
- }
