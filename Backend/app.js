@@ -21,7 +21,9 @@ app.use(session({
   secret : process.env.SECRET_KEY,
   resave : false,
   saveUninitialized : false,
-  cookie : { secure : false }
+  cookie : { 
+    maxAge : 60000
+  }
 }))
 
 app.use('/tasks/api', taskRoutes);

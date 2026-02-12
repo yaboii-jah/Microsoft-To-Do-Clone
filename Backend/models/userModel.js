@@ -16,7 +16,7 @@ export async function addUser (user) {
   return await users.create(user);
 }
 
-export async function checkUser (user) {
+export async function findUser (user) {
   return await users.findOne(user)
 }
 

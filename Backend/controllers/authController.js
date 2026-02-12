@@ -1,4 +1,4 @@
-import { addUser, checkUser } from "../models/userModel.js";
+import { addUser, findUser } from "../models/userModel.js";
 
 export async function registerUser (req, res) { 
   await addUser(req.body)
@@ -6,11 +6,9 @@ export async function registerUser (req, res) {
 }
 
 export async function login (req, res) {
-  const result = await checkUser(req.body)
+  const result = await findUser(req.body)
    
   if (!result) { 
     return  res.status(404).send({success : false})
   }
-
- 
 }

@@ -1,6 +1,7 @@
 import { getTasks } from "../models/taskModel.js"
 import { errorResponse } from "../utils/responseFormat.js";
 import { validationResult } from "express-validator";
+import { errorHandler } from "../utils/asyncErrorHandler.js";
 
 export function bodyValidator (req, res, next) {
   if (Object.keys(req.body).length === 0) {
@@ -11,9 +12,13 @@ export function bodyValidator (req, res, next) {
 }
 
 export async function dataEqualityChecker (req, res, next) {
-  const task = await getTasks({_id : req.params.id});
+  const { success, data } = await errorHandler(() => getTasks({_id : req.params.id}));
 
-  if (task.length === 0) { 
+  if (!success) {
+    return res.status(500).send(new errorResponse(true, 'There is a problem with the server', 'INTERNAL_SERVER_ERROR'))
+  }
+
+  if (data.length === 0) { 
     return res.status(404).send(new errorResponse(false, 'Data not Found', 'NOT_FOUND'));
   } 
 
