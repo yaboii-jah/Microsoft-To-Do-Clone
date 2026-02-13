@@ -14,11 +14,12 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
+      
         const user = await users.findOne({
           email : profile.emails[0].value
         })
     
-        // continue the process here
+    
 
       } catch (error) { 
         return done(error, null)
