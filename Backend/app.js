@@ -22,12 +22,13 @@ app.use(session({
   resave : false,
   saveUninitialized : false,
   cookie : { 
-    maxAge : 60000
+    maxAge : 300000,
+    signed : true
   }
 }))
 
-app.use('/tasks/api', taskRoutes);
 app.use('/auth/api', authRoutes)
+app.use('/tasks/api', taskRoutes);
 
 export function start() { 
   app.listen(3000, () => {

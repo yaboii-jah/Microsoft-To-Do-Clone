@@ -19,8 +19,8 @@ export const userValidator = {
       .exists().withMessage('Email field dont\'t exist')
       .trim()
       .notEmpty().withMessage('Invalid Value on Email')
-      .normalizeEmail()
-      .isEmail().with('Must be a valid email address'),
+      .isEmail().withMessage('Must be a valid email address')
+      .normalizeEmail(),
 
   date :
     body('date')
@@ -28,4 +28,26 @@ export const userValidator = {
       .trim()
       .notEmpty().withMessage('Invalid Value on Date')
       .isISO8601().withMessage('Date must be in ISO8601')
-}     
+}  
+
+export async function logInValidator (req, res, next) {
+  const fields = Object.keys(req.body);
+  
+  const validators = []
+
+  for (const field of fields) {
+    if (field === 'email' || field === 'password') {
+      validators.push(userValidator[field])
+    }
+  }
+
+  if (validators.length === 0) { 
+    return res.status(422).send(new errorResponse(false, 'Invalid fields to Check', 'NO_VALID_FIELDS'))
+  }
+  
+  for (const validator of validators) {
+    await validator.run(req)
+  }
+
+  next()
+}

@@ -3,6 +3,7 @@ export async function errorHandler (asyncOperation) {
     const result =  await asyncOperation()
     return { success : true, data : result }
   } catch ( error ) {
+    console.log(error)
     return { success : false }
   }
 }

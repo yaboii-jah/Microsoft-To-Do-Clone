@@ -1,4 +1,4 @@
-import { addUser, findUser } from "../models/userModel.js";
+import { addUser } from "../models/userModel.js";
 
 export async function registerUser (req, res) { 
   await addUser(req.body)
@@ -6,9 +6,13 @@ export async function registerUser (req, res) {
 }
 
 export async function login (req, res) {
-  const result = await findUser(req.body)
-   
-  if (!result) { 
-    return  res.status(404).send({success : false})
-  }
+  req.session.visited = true
+  req.session.user = req.user
+  console.log(req.sessionID)
+  res.status(200).send({success : true})
 }
+
+
+// req.session => get session object
+// req.sessionID => get session id 
+// req.session.visited = true  => make the session id permanent unless manually change
