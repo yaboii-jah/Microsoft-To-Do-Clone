@@ -5,6 +5,9 @@ import { matchedData } from 'express-validator';
 
 export async function createTask (req, res) {
   const validatedData = matchedData(req)
+
+  validatedData['userID'] = req.session.user._id;
+
   const { success, data} = await errorHandler(() => addTask(validatedData))
   
   if (!success) {

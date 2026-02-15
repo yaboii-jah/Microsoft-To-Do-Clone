@@ -1,13 +1,12 @@
 import mongoose from 'mongoose'
 
 const taskSchema = new mongoose.Schema({
+  userID : String,
   task : String,
   category : String,
   date : Date,
   status : String
 })
-
-// implement a proper error handling for process that requires sending request to an api/database
 
 const tasks = mongoose.model('tasks', taskSchema)
 
