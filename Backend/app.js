@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import passport from 'passport';
 
 dotenv.config();
 const app = express();
@@ -25,9 +26,12 @@ app.use(session({
     maxAge : 300000,
     signed : true
   }
-}))
+}));
 
-app.use('/auth/api', authRoutes)
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/auth/api', authRoutes);
 app.use('/tasks/api', taskRoutes);
 
 export function start() { 
