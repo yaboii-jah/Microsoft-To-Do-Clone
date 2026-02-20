@@ -4,7 +4,7 @@ import { errorHandler } from "../utils/asyncErrorHandler.js";
 import bcrypt from "bcrypt"
 
 export async function registerUser (req, res) {
-  req.body.password = await bcrypt.hash( req.body.password, 10)
+  req.body.password = await errorHandler(() => bcrypt.hash( req.body.password, 10))
  
   const {success} = await errorHandler(() => addUser(req.body))
 
@@ -16,7 +16,6 @@ export async function registerUser (req, res) {
 }
 
 export async function login (req, res) {
-  console.log(req.session)
   res.status(200).send(new successResponse(true, null, "User Successfully Log In"))
 }
 
