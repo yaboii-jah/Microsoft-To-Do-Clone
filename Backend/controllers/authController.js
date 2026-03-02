@@ -1,12 +1,13 @@
 import { addUser } from "../models/userModel.js";
 import { successResponse, errorResponse } from "../utils/responseFormat.js";
 import { errorHandler } from "../utils/asyncErrorHandler.js";
-import bcrypt from "bcrypt"
 
 export async function registerUser (req, res) {
-  req.body.password = await errorHandler(() => bcrypt.hash( req.body.password, 10))
- 
+  const { data } = await errorHandler(() => bcrypt.hash( req.body.password, 10))
+   
+  req.body.password = data
   const {success} = await errorHandler(() => addUser(req.body))
+
 
   if (!success) {
     return res.status(500).send(new errorResponse(false, 'There is a problem with the server', 'INTERNAL_SERVER_ERROR'))

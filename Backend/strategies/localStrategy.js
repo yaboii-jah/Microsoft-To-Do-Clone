@@ -11,6 +11,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await findUser({_id : id})
+    console.log(user)
 
     if (!user) {
       done(null, false, new errorResponse(false, 'User not Found', 'USER_NOT_FOUND' ))
@@ -31,7 +32,7 @@ export default passport.use(
         return done(null, false, new errorResponse(false, 'User not Found', 'USER_NOT_FOUND' ))
       }
 
-      const isMatch = await bcrypt.compare(password, user.password)
+      const isMatch = bcrypt.compare(password, user.password)
 
       if (!isMatch) {
         return done(null, false, new errorResponse(false, 'Invalid Password', 'INVALID_DATA' ))

@@ -8,6 +8,8 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
+import MongoStore from 'connect-mongo';
+import { MongoGCPError } from 'mongodb';
 
 dotenv.config();
 const app = express();
@@ -25,7 +27,11 @@ app.use(session({
   cookie : { 
     maxAge : 300000,
     signed : true
-  }
+  },
+  store: MongoStore.create({
+    client: mongoose.connection.getClient()
+  })
+
 }));
 
 app.use(passport.initialize());

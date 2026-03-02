@@ -5,11 +5,12 @@ import { userValidator, logInValidator } from "../validators/userValidator.js";
 import { checkUser, checkCredentials } from "../middlewares/authValidation.js";
 import { sessionStatus } from "../middlewares/authValidation.js";
 import passport from "passport";
+import { hashPassword } from "../utils/hashPassword.js";
 import '../strategies/localStrategy.js';
 
 export const routes = new Router ();
 
 
 routes.post('/login', bodyValidator, logInValidator, validationResultChecker, passport.authenticate("local"), login) 
-routes.post('/register', bodyValidator, Object.values(userValidator), validationResultChecker, checkUser, registerUser)
+routes.post('/register', bodyValidator, Object.values(userValidator), validationResultChecker, checkUser, hashPassword, registerUser)
 routes.post('/logout', sessionStatus, logout)
