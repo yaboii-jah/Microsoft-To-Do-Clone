@@ -9,7 +9,6 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
 import MongoStore from 'connect-mongo';
-import { MongoGCPError } from 'mongodb';
 
 dotenv.config();
 const app = express();

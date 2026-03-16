@@ -6,11 +6,13 @@ const userSchema = new mongoose.Schema({
   userName : String,
   password : String,
   email : String,
+  googleId : String,
+  avatar : String,
   date : Date,
   status : String
 })
 
-const users = mongoose.model('users', userSchema)
+export const users = mongoose.model('users', userSchema)
 
 export async function addUser (user) {
   return await users.create(user);

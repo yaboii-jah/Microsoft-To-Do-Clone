@@ -30,6 +30,10 @@ export async function logout (req, res) {
   })
 }
 
+export function providerLogin (req, res) {
+  console.log('success')
+}
+
 
 // req.session => get session object
 // req.sessionID => get session id 

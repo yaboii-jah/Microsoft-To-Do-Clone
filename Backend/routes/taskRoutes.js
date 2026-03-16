@@ -5,7 +5,6 @@ import { addTaskValidator, routeParamsTaskValidator, updateTaskValidator } from 
 import { sessionStatus } from '../middlewares/authValidation.js';
 
 export const routes = new Router ();
-
 routes.use(sessionStatus)
 
 routes.post('/add', bodyValidator, Object.values(addTaskValidator), validationResultChecker, createTask)

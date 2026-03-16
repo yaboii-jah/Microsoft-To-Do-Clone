@@ -21,8 +21,6 @@ export async function dataEqualityChecker (req, res, next) {
   if (data.length === 0) { 
     return res.status(404).send(new errorResponse(false, 'Data not Found', 'NOT_FOUND'));
   } 
-
-  req.task = task;
   next();
 }
 
