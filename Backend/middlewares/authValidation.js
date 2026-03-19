@@ -1,4 +1,4 @@
-import { findUser } from '../models/userModel.js'
+//import { findUser } from '../models/userModel.js'
 import { errorHandler } from '../utils/asyncErrorHandler.js'
 import { errorResponse } from '../utils/responseFormat.js'
 
@@ -17,7 +17,7 @@ export async function checkUser (req, res, next) {
 }
 
 export async function checkCredentials (req, res, next) { 
-    const {success, data} = await errorHandler(() => findUser(req.body))
+    //const {success, data} = await errorHandler(() => findUser(req.body))
     
     if (!success) {
         return res.status(500).send(new errorResponse(false, 'There is a problem with the server', 'INTERNAL_SERVER_ERROR'))
