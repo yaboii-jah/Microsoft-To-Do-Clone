@@ -1,14 +1,13 @@
-import { addTask, removeTask, getTasks, updateTask as update} from "../models/taskModel.js"
+import { tasks} from "../models/taskModel.js"
 import { successResponse, errorResponse } from "../utils/responseFormat.js";
 import { errorHandler } from "../utils/asyncErrorHandler.js";
 import { matchedData } from 'express-validator'; 
 
 export async function createTask (req, res) {
   const validatedData = matchedData(req)
+  validatedData['userID'] = req.user[0]._id;
 
-  validatedData['userID'] = req.user._id;
-
-  const { success, data} = await errorHandler(() => addTask(validatedData))
+  const { success, data} = await errorHandler(() => tasks.create(validatedData))
   
   if (!success) {
     return res.status(500).send(new errorResponse(false, 'There is a problem with the server', 'INTERNAL_SERVER_ERROR'))
@@ -18,7 +17,7 @@ export async function createTask (req, res) {
 
 export async function deleteTask (req, res) {
   const { id } = matchedData(req)
-  const { success} = await errorHandler(() => removeTask(id))
+  const { success} = await errorHandler(() => tasks.deleteOne({_id : id}))
   
   if (!success) {
     return res.status(500).send(new errorResponse(false, 'There is a problem with the server', 'INTERNAL_SERVER_ERROR'))
@@ -28,7 +27,10 @@ export async function deleteTask (req, res) {
 }
 
 export async function updateTask (req, res) {
-  const {success} = await errorHandler(() => update(req.body, req.params.id))
+  const {success} = await errorHandler(() => tasks.updateOne(
+      { _id : req.body },
+      { $set : req.params}
+  ))
 
   if (!success) {
     return res.status(500).send(new errorResponse(false, 'There is a problem with the server', 'INTERNAL_SERVER_ERROR'))
@@ -37,7 +39,7 @@ export async function updateTask (req, res) {
 }
 
 export async function listTasks (req, res) {
-  const {success, data} = await errorHandler(() => getTasks())
+  const {success, data} = await errorHandler(() => tasks.find({}))
 
   if(!success) {
     return res.status(500).send(new errorResponse(false, 'There is a problem with the server', 'INTERNAL_SERVER_ERROR'))

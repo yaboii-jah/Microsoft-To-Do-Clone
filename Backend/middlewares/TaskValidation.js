@@ -1,4 +1,4 @@
-import { getTasks } from "../models/taskModel.js"
+import { tasks } from "../models/taskModel.js"
 import { errorResponse } from "../utils/responseFormat.js";
 import { validationResult } from "express-validator";
 import { errorHandler } from "../utils/asyncErrorHandler.js";
@@ -12,7 +12,7 @@ export function bodyValidator (req, res, next) {
 }
 
 export async function dataEqualityChecker (req, res, next) {
-  const { success, data } = await errorHandler(() => getTasks({_id : req.params.id}));
+  const { success, data } = await errorHandler(() => tasks.find({_id : req.params.id}));
 
   if (!success) {
     return res.status(500).send(new errorResponse(true, 'There is a problem with the server', 'INTERNAL_SERVER_ERROR'))
