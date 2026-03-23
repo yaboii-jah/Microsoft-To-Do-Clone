@@ -10,12 +10,13 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await users.find({
+    const user = await users.findById({
       _id :  id 
     })
 
-    done(null, user)
+    if (!user) return done (null, false)
 
+    done(null, user)
   } catch (err) {
     done (err, null)
   }
@@ -26,26 +27,28 @@ export default passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL : "/auth/api/google/callback"
+      callbackURL : "/auth/api/google/callback",
+      proxy : true
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        let user = await users.findOne({
-          email : profile.emails[0].value
-        })
-
-        if (!user) {
-          user = await users.create({
-            email : profile.emails[0].value,
-            username : profile.displayName,
-            googleId : profile.id,
-            avatar : profile.photos[0].value 
-          })
-        }
+        const user = await users.findOneAndUpdate(
+          {email},
+          {
+            $setOnInsert: {
+              email : profile.emails[0].value,
+              username : profile.displayName,
+              googleId : profile.id,
+              avatar : profile.photos[0].value
+            }
+          },
+          {new : true, upsert: true}
+        )
 
         return done(null, user)
 
-      } catch (error) { 
+      } catch (error) {
+        console.error("Google Auth Error: ", error)
         return done(error, null)
       }
     }
