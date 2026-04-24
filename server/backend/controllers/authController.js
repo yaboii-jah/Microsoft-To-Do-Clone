@@ -5,11 +5,16 @@ export function login (req, res) {
 }
 
 export function logout (req, res) {
-  req.sessionStore.destroy((err) => {
+  req.session.destroy((err) => {
     if (err) { 
       return res.status(500).send(new errorResponse(false, 'There is a problem destroying session', 'INTERNAL_SERVER_ERROR'))
     }
+  
     res.clearCookie('connect.sid')
-    res.sendStatus(204)
+    return res.sendStatus(204)
   })
 }
+
+
+
+

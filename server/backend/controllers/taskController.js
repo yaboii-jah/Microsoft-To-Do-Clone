@@ -51,13 +51,12 @@ export async function updateTask (req, res) {
   }
 }
 
-// continue here
-
 export async function listTasks (req, res) {
-  const {success, data} = await errorHandler(() => tasks.find({}))
-  
   try {
     const result = await tasks.find({})
+    
+    if (result.length === 0 ) return res.status(200).send(new successResponse(false, null, 'Cannot find any data'))
+
     return res.status(200).send(new successResponse(true, result, 'Successfully retrieved data'))
 
   } catch (error) {
