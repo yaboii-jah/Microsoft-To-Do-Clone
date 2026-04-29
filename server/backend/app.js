@@ -16,7 +16,10 @@ const app = express();
 await mongoose.connect(process.env.MONGO_URI)
 
 app.use(helmet())
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
 app.use(express.json())
 app.use(morgan('dev'))
 app.use(session({
@@ -26,7 +29,8 @@ app.use(session({
   cookie : { 
     maxAge : 3600000 * 24,
     httpOnly: true,
-    sameSite: 'lax'
+    sameSite: 'none',
+    secure : true
   },
   store: MongoStore.create({
     client: mongoose.connection.getClient()
@@ -44,7 +48,7 @@ const PORT = 3000
 
 export function start() { 
   app.listen(PORT, () => {
-    console.log(`Listening at http://localhost ${PORT}`)
+    console.log(`Listening at http://localhost:${PORT}`)
   })
 }
 

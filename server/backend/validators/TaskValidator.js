@@ -13,7 +13,6 @@ export const addTaskValidator =  {
     body('category')
       .exists({ checkFalsy: true }).withMessage('Category Field don\'t exist')
       .isString().withMessage('Category must be String') 
-      // create a .isIn() for expected data outcome which is currently not sure 
       .trim()
       .notEmpty().withMessage('Invalid Value on Category'),
 
