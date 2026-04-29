@@ -1,15 +1,18 @@
-import { user_login } from "../api/user_login.js"
+import { google_login } from "../0Auth/google";
+import google_icon from '../assets/icons/google.png'
+import './login.css'
 
 export function Login() {  
-    async function handleLogin() { 
-        const result = await user_login();
-        console.log(result);
-    }
-
   return (
-    <>
-        <h1>Login</h1>
-        <button onClick={() => handleLogin()}>Login with Google</button>
+    <>  
+        <title>Login</title>
+
+        <div className="login-container">
+          <div className="login-box" onClick={google_login}>
+            <img className="google-icon" src={google_icon} alt="Google Icon" />
+            <span>Sign in with Google</span>
+          </div>
+        </div>
     </>
   )
 }

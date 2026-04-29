@@ -1,7 +1,7 @@
 import { successResponse, errorResponse } from "../utils/responseFormat.js";
 
 export function login (req, res) {
-  res.status(200).send(new successResponse(true, null, "User Successfully Log In"))
+  res.redirect('http://localhost:5173/tasks/myday')
 }
 
 export function logout (req, res) {

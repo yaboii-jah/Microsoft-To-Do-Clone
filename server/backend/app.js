@@ -29,8 +29,8 @@ app.use(session({
   cookie : { 
     maxAge : 3600000 * 24,
     httpOnly: true,
-    sameSite: 'none',
-    secure : true
+    sameSite: 'lax',
+    secure : false
   },
   store: MongoStore.create({
     client: mongoose.connection.getClient()
