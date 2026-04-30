@@ -1,6 +1,6 @@
 import './App.css'
 import { Routes, Route} from 'react-router'
-import { Login } from './pages/login'
+import { Login } from './pages/login/login'
 
 function App() {
   return (

@@ -1,5 +1,5 @@
-import { google_login } from "../0Auth/google";
-import google_icon from '../assets/icons/google.png'
+import { google_login } from "../../0Auth/google";
+import google_icon from '../../assets/icons/google.png'
 import './login.css'
 
 export function Login() {  
