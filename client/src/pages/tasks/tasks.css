@@ -1,5 +1,132 @@
-.tasks.container {
+hr {
+    border: none;
+    border-top: 1px solid #646464; 
+
+}
+
+.tasks-container {
     display: flex;
     flex-direction: column;
     height: 100vh;
+}
+
+.main-content {
+    display: flex;
+    height: 100%;
+}
+
+.left-drawer {
+    width: 250px; ;
+    background-color: #2d2d2d;
+}
+
+.upper-drawer {
+    height: 95%;
+}
+
+.drawer-header {
+    align-content: end;
+    height: 32px;
+    padding-bottom: 10px;
+    padding: 16px 22px;
+}
+
+.drawer-icon {
+    cursor: pointer;
+}
+
+.drawer-navigation {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.drawer-category {
+    display: flex;
+    align-items: center;
+    height: 46px;
+    padding: 0 24px;
+    gap: 16px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.drawer-category:hover {
+    background-color: #383838;
+}
+
+.drawer-category:active {
+    border-left: 2px solid rgba(0, 94, 255, 0.752);
+    background-color: #4a4a4a;
+}
+
+.seperator {
+    padding: 2px 16px;
+}
+
+.drawer-newlist {
+    display: flex;
+    flex-direction: column;
+    height: 56%;
+}
+
+.newlist-category {
+    display: flex;
+    align-items: center;
+    height: 46px;
+    width: 100%;
+}
+
+.newlist-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    height: 100%;
+    padding-left: 26px;
+    cursor: pointer;
+}
+
+.newlist-container:hover {
+    background-color: #383838;
+}
+
+.newlist-input::placeholder {
+    color: #78bafd;
+}
+
+.add-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100%;
+    cursor: pointer;
+}
+
+.add-group:hover {
+    background-color: #383838;
+}
+
+.newlist-input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+}
+
+.lower-drawer {
+    height: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tasks {
+    flex: 1;
+    padding: 20px;
+    background-color: #11100F;
 }
