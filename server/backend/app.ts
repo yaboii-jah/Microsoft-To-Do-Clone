@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 import express from 'express'
 import cors from 'cors';
-import { routes as taskRoutes } from './routes/taskRoutes.js'
-import { routes as authRoutes } from './routes/authRoutes.js';
+import { routes as taskRoutes } from './routes/taskRoutes'
+import { routes as authRoutes } from './routes/authRoutes';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
 import session from 'express-session';
@@ -13,8 +13,6 @@ import helmet from 'helmet';
 dotenv.config();
 const app = express();
 
-await mongoose.connect(process.env.MONGO_URI)
-
 app.use(helmet())
 app.use(cors({
   origin: 'http://localhost:5173',
@@ -23,7 +21,7 @@ app.use(cors({
 app.use(express.json())
 app.use(morgan('dev'))
 app.use(session({
-  secret : process.env.SECRET_KEY,
+  secret : process.env.SECRET_KEY!,
   resave : false,
   saveUninitialized : false,
   cookie : { 
@@ -33,7 +31,7 @@ app.use(session({
     secure : false
   },
   store: MongoStore.create({
-    client: mongoose.connection.getClient()
+    mongoUrl: process.env.MONGO_URI!
   })
 
 }));
@@ -46,7 +44,9 @@ app.use('/tasks/api', taskRoutes);
 
 const PORT = 3000
 
-export function start() { 
+export async function start() {
+  await mongoose.connect(process.env.MONGO_URI!)
+
   app.listen(PORT, () => {
     console.log(`Listening at http://localhost:${PORT}`)
   })

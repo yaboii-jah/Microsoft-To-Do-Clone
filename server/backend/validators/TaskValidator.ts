@@ -1,5 +1,6 @@
-import { param, body } from 'express-validator'; 
+import { param, body, ValidationChain } from 'express-validator'; 
 import { errorResponse } from '../utils/responseFormat.js';
+import { Request, Response, NextFunction } from 'express';
 
 export const addTaskValidator =  { 
   task : 
@@ -37,13 +38,13 @@ export const routeParamsTaskValidator = [
     .isMongoId().withMessage('Please Provide a Valid MongoID')
 ]
 
-export async function updateTaskValidator (req, res, next) {
-  const fields = Object.keys(req.body);
+export async function updateTaskValidator (req: Request, res: Response, next: NextFunction) {
+  const fields = Object.keys(req.body) as Array<keyof typeof addTaskValidator>
   
-  const validators = []
+  const validators : ValidationChain[] = []
 
   for (const field of fields) {
-    if (addTaskValidator[field]) {
+    if (field in addTaskValidator) {
       validators.push(addTaskValidator[field])
     }
   }

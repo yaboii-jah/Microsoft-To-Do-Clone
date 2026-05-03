@@ -1,12 +1,13 @@
 import { tasks} from "../models/taskModel.js"
 import { successResponse, errorResponse } from "../utils/responseFormat.js";
+import { Request, Response } from "express";
 import { matchedData } from 'express-validator'; 
 
-export async function createTask (req, res) {
+export async function createTask (req: Request, res: Response) {
   const validatedData = matchedData(req)
   const finalizedData = {
     ...validatedData,
-    ['userID'] : req.user._id
+    ['userID'] : req.user?._id
   }
   
   try {
@@ -19,7 +20,7 @@ export async function createTask (req, res) {
   }
 }
 
-export async function deleteTask (req, res) {
+export async function deleteTask (req: Request, res: Response) {
   const { id } = matchedData(req)
 
   try {
@@ -31,7 +32,7 @@ export async function deleteTask (req, res) {
   }
 }
 
-export async function updateTask (req, res) {
+export async function updateTask (req: Request, res: Response) {
   try {
     const result = await tasks.findOneAndUpdate(
       { _id : req.params.id },
@@ -51,7 +52,7 @@ export async function updateTask (req, res) {
   }
 }
 
-export async function listTasks (req, res) {
+export async function listTasks (req: Request, res: Response) {
   try {
     const result = await tasks.find({})
     
