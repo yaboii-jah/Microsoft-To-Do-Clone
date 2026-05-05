@@ -12,6 +12,7 @@ hr {
 
 .main-content {
     display: flex;
+    justify-content: space-between;
     height: 100%;
 }
 

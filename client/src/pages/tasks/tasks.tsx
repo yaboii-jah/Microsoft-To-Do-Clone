@@ -23,6 +23,8 @@ import { GoBell } from "react-icons/go";
 import { IoIosRepeat } from "react-icons/io";
 import "./tasks.css"
 
+import { TaskDrawer } from "../../components/task_drawer";
+
 export function Tasks({type}: {type: string}) {
     return (
         <div className="tasks-container">
@@ -174,7 +176,9 @@ export function Tasks({type}: {type: string}) {
 
                     </div>
                 </div>
+                <TaskDrawer />
             </div>
+            
         </div>
     )
 }
